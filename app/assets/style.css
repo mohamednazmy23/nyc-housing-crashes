@@ -5,11 +5,24 @@ header { padding: 32px 0 16px; }
 header h1 { margin: 0 0 6px; font-size: 26px; }
 header p { margin: 0; color: #555; }
 
+/* Filter bar: stays at the top while scrolling */
 .filter-bar { position: sticky; top: 0; z-index: 10; background: #fff;
               padding: 12px 16px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0; }
+.dd { flex: 1; min-width: 150px; }
+#search-input { flex: 2; min-width: 240px; padding: 8px 10px;
+                border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+#search-status { color: #666; font-size: 13px; }
+
+button { padding: 8px 14px; border-radius: 6px; border: 1px solid #ccc;
+         background: #fff; cursor: pointer; font-size: 14px; }
+button:hover { background: #f0f3f7; }
+button.primary { background: #2F5582; color: #fff; border: none; font-weight: 600; margin-left: auto; }
+button.primary:hover { background: #24466b; }
 
 .story { background: #fff; padding: 16px 20px; border-radius: 10px; margin: 20px 0; }
 
+/* Chart sections and cards */
 section h2 { margin: 32px 0 12px; font-size: 20px; }
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .card { background: #fff; border-radius: 10px; padding: 12px 16px;
