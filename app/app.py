@@ -5,8 +5,9 @@ from app.data import TABLES
 from app.charts import CHARTS
 
 
-app = Dash(__name__, title="NYC Housing × Crashes")
-server = app.server  # Render's gunicorn uses this
+dash_app = Dash(__name__, title="NYC Housing × Crashes")   # changed
+server = dash_app.server                                    # changed
+app = server  # changed: Vercel runs the variable "app" in app/app.py, so it must be the Flask server
 
 
 def card(qid, question, wide=False):
@@ -25,7 +26,7 @@ def section(title, cards):
     ])
 
 
-app.layout = html.Div(className="page", children=[
+dash_app.layout = html.Div(className="page", children=[    # changed
     html.Header([
         html.H1("Are new affordable homes being built on NYC's most dangerous streets?"),
         html.P("Affordable Housing Production (HPD) × Motor Vehicle Crashes (NYPD), 2014–2025"),
@@ -68,7 +69,7 @@ def safe_chart(chart, data, filters, number):
         return empty_figure(f"Q{number} error: {err}")
 
 
-@app.callback(
+@dash_app.callback(                                         # changed
     [Output(f"q{i}", "figure") for i in range(1, 13)],
     Input("generate-btn", "n_clicks"),
     State("borough-dd", "value"),
@@ -84,8 +85,8 @@ def generate_report(n_clicks, borough, year_from, year_to, construction, road_us
     return [safe_chart(chart, data, filters, i + 1) for i, chart in enumerate(CHARTS)]
 
 
-register_search_callback(app)  # search box (mostafa.2)
+register_search_callback(dash_app)  # search box (mostafa.2)   # changed
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    dash_app.run(debug=True)                                # changed
